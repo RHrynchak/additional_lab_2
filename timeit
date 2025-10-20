@@ -1,0 +1,22 @@
+#include <iostream>
+#include <chrono>
+
+using namespace std;
+
+template <class F>
+void timeit(F &&f, int repeat=1)
+{
+    volatile int result_sum = 0;
+    long long sum = 0;
+    for ( int i = 0; i < repeat; ++i )
+    {
+        auto time1 = chrono::system_clock::now();
+        result_sum = f();
+        auto time2 = chrono::system_clock::now();
+        auto tdiff = time2 - time1;
+        auto ns = duration_cast<std::chrono::microseconds>(tdiff);
+
+        sum += ns.count();
+    }
+    cout << (float)sum / repeat << " microseconds in average" << endl;
+}
