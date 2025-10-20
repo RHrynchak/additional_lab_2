@@ -1,3 +1,5 @@
+//Compiler MSVC
+
 #include <iostream>
 #include <vector>
 #include <functional>
